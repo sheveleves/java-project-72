@@ -5,6 +5,10 @@ plugins {
     id 'jacoco'
 }
 
+application {
+    mainClass = 'hexlet.code.App'
+}
+
 jacocoTestReport {
     dependsOn test
 }
@@ -25,6 +29,9 @@ repositories {
 }
 
 dependencies {
+    implementation 'io.javalin:javalin:5.3.2'
+    implementation 'org.slf4j:slf4j-simple:2.0.7'
+
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
@@ -36,3 +43,6 @@ test {
 compileJava {
     options.release = 17
 }
+
+task stage(dependsOn: ['clean', 'installDist'])
+installDist.mustRunAfter clean
