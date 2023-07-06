@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'jacoco'
+    id 'io.ebean' version '12.16.1'
 }
 
 application {
@@ -32,6 +33,19 @@ dependencies {
     implementation 'io.javalin:javalin:5.3.2'
     implementation 'org.slf4j:slf4j-simple:2.0.7'
 
+    implementation 'io.ebean:ebean:12.16.1'
+    implementation 'io.ebean:ebean-querybean:12.16.1'
+    implementation 'io.ebean:ebean-annotation:7.8'
+    implementation 'io.ebean:ebean-ddl-generator:12.16.1'
+    implementation 'io.ebean:ebean-migration:12.16.1'
+    annotationProcessor 'io.ebean:querybean-generator:12.16.1'
+
+    implementation 'com.h2database:h2:2.1.214'
+    implementation 'org.postgresql:postgresql:42.5.4'
+
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.5'
+    implementation 'javax.activation:activation:1.1.1'
+
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
@@ -46,3 +60,8 @@ compileJava {
 
 task stage(dependsOn: ['clean', 'installDist'])
 installDist.mustRunAfter clean
+
+task generateMigration(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'hexlet.code.MigrationGenerator'
+}
