@@ -1,7 +1,13 @@
 package hexlet.code;
 
 
+import hexlet.code.domain.Url;
+import hexlet.code.domain.query.QUrl;
 import io.javalin.Javalin;
+import io.javalin.http.Handler;
+
+import java.util.List;
+
 
 public class App {
     private static int getPort() {
@@ -11,7 +17,9 @@ public class App {
     public static Javalin getApp() {
         Javalin app = Javalin.create(config -> {
             config.plugins.enableDevLogging(); })
-                .get("/", ctx -> ctx.result("Hello world"));
+                .get("/", ctx -> ctx.result("Hello world"))
+                .get("/url/", see)
+                .post("/url/", create);
         return app;
 
     }
@@ -20,4 +28,17 @@ public class App {
         Javalin app = getApp();
         app.start(getPort());
     }
+    //for check up and debug temporarily
+    private static Handler create = ctx -> {
+        String urlParam = ctx.formParam("urlParam");
+        Url url = new Url(urlParam);
+        url.save();
+    };
+
+    private static Handler see = ctx -> {
+        List<Url> urls = new QUrl()
+//                .id.equalTo(1L)
+                .findList();
+        ctx.result(urls.toString());
+    };
 }
