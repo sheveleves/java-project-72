@@ -19,10 +19,12 @@ public class App {
         String port = System.getenv().getOrDefault("PORT", "8000");
         return Integer.valueOf(port);
     }
+
     public static Javalin getApp() {
         Javalin app = Javalin.create(config -> {
-            config.plugins.enableDevLogging(); })
-                .get("/", ctx -> ctx.result("Hello world"))
+            config.plugins.enableDevLogging();
+            JavalinThymeleaf.init(getTemplateEngine()); })
+                .get("/", ctx -> ctx.render("index.html"))
                 .get("/url/", see)
                 .post("/url/", create);
         return app;
