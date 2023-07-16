@@ -14,5 +14,5 @@ datasource:
   production:
     username: ${JDBC_DATABASE_USERNAME}
     password: ${JDBC_DATABASE_PASSWORD}
-    url: ${JDBC_DATABASE_URL}
+    url: jdbc:postgresql://${JDBC_DATABASE_HOST}:${JDBC_DATABASE_PORT}/${JDBC_DATABASE_DATABASE}
 
