@@ -5,12 +5,14 @@ import io.ebean.annotation.WhenCreated;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import java.time.Instant;
 
 @Entity
 public final class Url extends Model {
     @Id
     private long id;
+    @Lob
     private String name;
     @WhenCreated
     private Instant createAt;
@@ -30,14 +32,7 @@ public final class Url extends Model {
         return name;
     }
 
-    public void setName(String nameUrl) {
-        this.name = nameUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Url{" + "id=" + id
-                + ", name='" + name + '\''
-                + ", createAt=" + createAt + '}';
+    public Instant getCreateAt() {
+        return createAt;
     }
 }
