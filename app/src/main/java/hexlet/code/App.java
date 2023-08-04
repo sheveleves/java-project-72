@@ -40,7 +40,6 @@ public class App {
             if (!isProduction()) {
                 config.plugins.enableDevLogging();
             }
-            System.out.println(getMode());
             JavalinThymeleaf.init(getTemplateEngine()); });
         addRoutes(app);
 

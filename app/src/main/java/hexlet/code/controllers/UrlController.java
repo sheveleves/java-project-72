@@ -39,7 +39,7 @@ public class UrlController {
             ctx.sessionAttribute("flash-type", "success");
         }
 
-        ctx.redirect("/");
+        ctx.redirect("/urls");
 
     };
 
