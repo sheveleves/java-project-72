@@ -1,13 +1,16 @@
 package hexlet.code.domain;
 
+import io.ebean.Model;
 import io.ebean.annotation.WhenCreated;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import java.time.Instant;
 
-public class UrlCheck {
+@Entity
+public final class UrlCheck extends Model {
     @Id
     private long id;
     @WhenCreated
@@ -20,8 +23,10 @@ public class UrlCheck {
     @ManyToOne
     private Url url;
 
-    public UrlCheck(long id, int statusCode, String title, String h1, String description, Url url) {
-        this.id = id;
+    public UrlCheck() {
+    }
+
+    public UrlCheck(int statusCode, String title, String h1, String description, Url url) {
         this.statusCode = statusCode;
         this.title = title;
         this.h1 = h1;
