@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'io.ebean' version '13.17.4'
-
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 application {
@@ -75,4 +75,8 @@ installDist.mustRunAfter clean
 task generateMigration(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     mainClass = 'hexlet.code.MigrationGenerator'
+}
+
+testlogger {
+    showStandardStreams true
 }
