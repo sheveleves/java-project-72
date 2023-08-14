@@ -27,6 +27,7 @@ public class App {
             path("urls", () -> {
                 path("{id}", () -> {
                     get(UrlController.showUrl);
+                    post("checks", UrlController.checkUrl);
                 });
                 get(UrlController.showUrls);
                 post(UrlController.addUrl);
