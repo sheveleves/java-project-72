@@ -58,6 +58,8 @@ dependencies {
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
     implementation 'org.webjars:bootstrap:5.2.3'
+
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
 }
 
 test {
