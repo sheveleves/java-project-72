@@ -78,13 +78,9 @@ public class UrlController {
                 .findOne();
         HttpResponse<String> urlResponse = Unirest.get(url.getName()).asString();
         int statusCode = urlResponse.getStatus();
-        UrlCheck urlCheck = new UrlCheck(statusCode, "title" + url.getName(), "h1" + url.getName(), "description"
-                + url.getName(), url);
-        List<UrlCheck> urlChecks = url.getUrlChecks();
-        urlChecks.add(urlCheck);
+        UrlCheck urlCheck = new UrlCheck(statusCode, "title", "h1", "description", url);
         urlCheck.save();
         ctx.redirect("/urls/" + id);
-
     };
 }
 
