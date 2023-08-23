@@ -7,9 +7,13 @@ import io.ebean.PagedList;
 import io.javalin.http.Handler;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 public class UrlController {
 
@@ -77,8 +81,16 @@ public class UrlController {
                 .id.equalTo(id)
                 .findOne();
         HttpResponse<String> urlResponse = Unirest.get(url.getName()).asString();
+
+        Document parse = Jsoup.parse(urlResponse.getBody());
+        String title = parse.title();
+        Element h1Tag = parse.select("h1").first();
+        String h1 = Objects.isNull(h1Tag) ? "" : h1Tag.text();
+        Element nameDescriptionTag = parse.select("meta[name=description]").first();
+        String description = Objects.isNull(nameDescriptionTag) ? "" : nameDescriptionTag.attr("content");
         int statusCode = urlResponse.getStatus();
-        UrlCheck urlCheck = new UrlCheck(statusCode, "title", "h1", "description", url);
+
+        UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, url);
         urlCheck.save();
         ctx.redirect("/urls/" + id);
     };
