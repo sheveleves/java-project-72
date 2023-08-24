@@ -14,6 +14,8 @@ import org.jsoup.nodes.Element;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class UrlController {
 
@@ -47,18 +49,29 @@ public class UrlController {
         }
 
         ctx.redirect("/urls");
-
     };
 
     public static Handler showUrls = ctx -> {
+        int page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1) - 1;
+        int rowsPerPage = 10;
+
         PagedList<Url> pageUrls = new QUrl()
+                .setFirstRow(page * rowsPerPage)
                 .orderBy()
                 .id.asc()
-                .setMaxRows(100)
+                .setMaxRows(rowsPerPage)
                 .findPagedList();
 
-        List<Url> urls = pageUrls.getList();
+        int currentPage = pageUrls.getPageIndex() + 1;
+        int lastPage = pageUrls.getTotalPageCount() + 1;
+        List<Integer> pages = IntStream
+                .range(1, lastPage)
+                .boxed()
+                .collect(Collectors.toList());
 
+        List<Url> urls = pageUrls.getList();
+        ctx.attribute("currentPage", currentPage);
+        ctx.attribute("pages", pages);
         ctx.attribute("urls", urls);
         ctx.render("urls/index.html");
     };
