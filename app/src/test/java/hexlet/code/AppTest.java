@@ -24,13 +24,13 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 class AppTest {
     private static final String TITLE_PAGE = "Анализатор страниц";
     private static final String TEST_NAME_1 = "https://github.com";
     private static final String TEST_NAME_2 = "https://ru.hexlet.io";
-    private static final String PATH_FILE = "src/test/resources/testPage.html";
     private static MockWebServer mockWebServer;
 
 
@@ -48,7 +48,7 @@ class AppTest {
         database = DB.getDefault();
 
         mockWebServer = new MockWebServer();
-        MockResponse mockResponse = new MockResponse().setBody(Files.readString(Path.of(PATH_FILE)));
+        MockResponse mockResponse = new MockResponse().setBody(readFixture("testPage.html"));
         mockWebServer.enqueue(mockResponse);
         mockWebServer.start();
     }
@@ -190,5 +190,15 @@ class AppTest {
         assertThat(urlCheck.getH1()).isEqualTo("It's just for test");
         assertThat(urlCheck.getTitle()).isEqualTo("Here is title this page!");
         assertThat(urlCheck.getStatusCode()).isEqualTo(200);
+    }
+
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
+                .toAbsolutePath().normalize();
+    }
+
+    private static String readFixture(String fileName) throws IOException {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
     }
 }
