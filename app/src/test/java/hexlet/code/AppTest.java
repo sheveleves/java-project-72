@@ -73,7 +73,7 @@ class AppTest {
     }
 
     @Test
-    void testShowUrls() {
+    void testListUrls() {
         HttpResponse<String> response = Unirest.get(baseUrl + "/urls").asString();
         assertThat(response.getStatus()).isEqualTo(200);
         assertThat(response.getBody()).contains("ID", "Имя", "Последняя проверка", "Код ответа");

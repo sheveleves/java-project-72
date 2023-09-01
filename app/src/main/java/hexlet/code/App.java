@@ -29,7 +29,7 @@ public class App {
                     get(UrlController.showUrl);
                     post("checks", UrlController.checkUrl);
                 });
-                get(UrlController.showUrls);
+                get(UrlController.listUrls);
                 post(UrlController.addUrl);
             });
         });

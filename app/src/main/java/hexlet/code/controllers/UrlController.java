@@ -51,7 +51,7 @@ public class UrlController {
         ctx.redirect("/urls");
     };
 
-    public static Handler showUrls = ctx -> {
+    public static Handler listUrls = ctx -> {
         int page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1) - 1;
         int rowsPerPage = 10;
 
