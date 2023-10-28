@@ -70,7 +70,7 @@ test {
 }
 
 compileJava {
-    options.release = 17
+    options.release = 20
     options.encoding = 'UTF-8'
 }
 
