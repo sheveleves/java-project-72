@@ -32,8 +32,10 @@ public class UrlController {
             return;
         }
 
-        name = String.format("%s://%s%s", spec.getProtocol(), spec.getHost(),
-                spec.getPort() == -1 ? "" : ":" + spec.getPort());
+        String protocol = spec.getProtocol() + "://";
+        String host = spec.getHost();
+        String port = spec.getPort() == -1 ? "" : ":" + spec.getPort();
+        name = protocol + host + port;
 
         Url url = new QUrl().name.equalTo(name).findOne();
 
