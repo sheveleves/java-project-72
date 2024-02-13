@@ -27,11 +27,11 @@
     </nav>
 
     <main class="flex-grow-1">
+
         <div
                 th:if="${session.flash}"
                 th:class="'rounded-0 m-0 alert alert-dismissible fade show alert-' + ${ctx.consumeSessionAttribute('flash-type')}"
-                role="alert"
-        >
+                role="alert">
             <p class="m-0" th:text="${ctx.consumeSessionAttribute('flash')}"></p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <td>Дата создания</td>
-                    <td th:text="${#temporals.format(url.getCreateAt(), 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(url.getCreatedAtToInstant(), 'dd/MM/yyyy HH:mm')}"></td>
                 </tr>
             </tbody>
         </table>
@@ -47,7 +47,7 @@
                     <td th:text="*{getTitle()}"></td>
                     <td th:text="*{getH1()}"></td>
                     <td th:text="*{getDescription()}"></td>
-                    <td th:text="*{#temporals.format(getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="*{#temporals.format(getCreatedAtToInstant(), 'dd/MM/yyyy HH:mm')}"></td>
                 </tr>
             </tbody>
         </table>
