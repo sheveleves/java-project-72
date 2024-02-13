@@ -57,7 +57,7 @@ public class App {
 
     }
 
-    public static Javalin getApp() throws IOException, SQLException, ClassNotFoundException {
+    public static Javalin getApp() throws IOException, SQLException {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(getDatabaseUrl());
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
@@ -85,7 +85,7 @@ public class App {
     }
 
 
-    public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, IOException {
         Javalin app = getApp();
         app.start(getPort());
     }

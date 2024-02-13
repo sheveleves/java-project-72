@@ -54,7 +54,7 @@ class AppTest {
     }
 
     @BeforeEach
-    public void beforeEach() throws SQLException, IOException, ClassNotFoundException {
+    public void beforeEach() throws SQLException, IOException {
         app = App.getApp();
 
         UrlCheckRepository.truncate();
@@ -71,8 +71,6 @@ class AppTest {
             String responseBody = response.body().string();
             assertThat(responseBody).contains(TITLE_PAGE);
             assertThat(responseBody).contains("Анализатор страниц");
-//            assertThat(response.body().string()).contains(TITLE_PAGE);
-//            assertThat(response.body().string()).contains("Анализатор страниц");
         });
     }
 
