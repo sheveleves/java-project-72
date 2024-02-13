@@ -73,11 +73,6 @@ compileJava {
 task stage(dependsOn: ['clean', 'installDist'])
 installDist.mustRunAfter clean
 
-task generateMigration(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'hexlet.code.MigrationGenerator'
-}
-
 testlogger {
     showStandardStreams true
 }
