@@ -57,8 +57,6 @@ class AppTest {
     public void beforeEach() throws SQLException, IOException, ClassNotFoundException {
         app = App.getApp();
 
-        String sql = "SET REFERENTIAL_INTEGRITY FALSE";
-        UrlCheckRepository.executeSql(sql);
         UrlCheckRepository.truncate();
         UrlRepository.truncate();
         url = new Url(TEST_NAME_1);

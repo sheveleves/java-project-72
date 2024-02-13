@@ -94,13 +94,4 @@ public class UrlCheckRepository extends BaseRepository {
             log.error("The truncation has failed");
         }
     }
-
-    public static void executeSql(String sql) {
-        try (Connection conn = dataSource.getConnection();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException("The sql execution has failed");
-        }
-    }
 }
